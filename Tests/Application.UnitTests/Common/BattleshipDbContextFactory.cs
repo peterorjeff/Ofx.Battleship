@@ -18,5 +18,12 @@ namespace Application.UnitTests.Common
 
             return context;
         }
+
+        public static void Destroy(BattleshipDbContext context)
+        {
+            context.Database.EnsureDeleted();
+
+            context.Dispose();
+        }
     }
 }
