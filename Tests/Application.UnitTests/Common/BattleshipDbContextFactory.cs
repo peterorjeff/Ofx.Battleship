@@ -2,7 +2,7 @@
 using Ofx.Battleship.Persistence;
 using System;
 
-namespace Application.UnitTests.Common
+namespace Ofx.Battleship.Application.UnitTests.Common
 {
     public class BattleshipDbContextFactory
     {
