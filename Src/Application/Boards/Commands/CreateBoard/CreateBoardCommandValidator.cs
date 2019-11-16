@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Ofx.Battleship.Application.Boards.Commands
+namespace Ofx.Battleship.Application.Boards.Commands.CreateBoard
 {
     public class CreateBoardCommandValidator : AbstractValidator<CreateBoardCommand>
     {

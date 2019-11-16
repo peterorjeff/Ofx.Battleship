@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Ofx.Battleship.Application.Boards.Commands;
+using Ofx.Battleship.Application.Boards.Commands.CreateBoard;
 using System.Threading.Tasks;
 
 namespace Ofx.Battleship.WebAPI.Controllers

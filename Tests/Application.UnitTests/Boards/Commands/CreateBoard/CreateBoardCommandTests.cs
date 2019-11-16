@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using FluentAssertions;
-using Ofx.Battleship.Application.Boards.Commands;
+using Ofx.Battleship.Application.Boards.Commands.CreateBoard;
 using Ofx.Battleship.Application.Common.Exceptions;
 using Ofx.Battleship.Application.UnitTests.Common;
 using System;

@@ -2,7 +2,7 @@
 using Ofx.Battleship.Application.Common.Mappings;
 using Ofx.Battleship.Domain.Entities;
 
-namespace Ofx.Battleship.Application.Boards.Commands
+namespace Ofx.Battleship.Application.Boards.Commands.CreateBoard
 {
     public class BoardViewModel : IMapFrom<Board>
     {

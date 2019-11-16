@@ -6,7 +6,7 @@ using Ofx.Battleship.Domain.Entities;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Ofx.Battleship.Application.Boards.Commands
+namespace Ofx.Battleship.Application.Boards.Commands.CreateBoard
 {
     public class CreateBoardCommandHandler : IRequestHandler<CreateBoardCommand, BoardViewModel>
     {

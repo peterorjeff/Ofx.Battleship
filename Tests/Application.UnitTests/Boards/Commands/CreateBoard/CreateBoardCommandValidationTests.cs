@@ -1,5 +1,5 @@
 ﻿using FluentValidation.TestHelper;
-using Ofx.Battleship.Application.Boards.Commands;
+using Ofx.Battleship.Application.Boards.Commands.CreateBoard;
 using Xunit;
 
 namespace Ofx.Battleship.Application.UnitTests.Boards.Commands.CreateBoard
