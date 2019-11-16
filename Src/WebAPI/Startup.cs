@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Ofx.Battleship.Application;
+using Ofx.Battleship.Persistence;
 
-namespace WebAPI
+namespace Ofx.Battleship.WebAPI
 {
     public class Startup
     {
@@ -17,6 +19,9 @@ namespace WebAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApplication();
+            services.AddPersistence();
+
             services.AddControllers();
         }
 
