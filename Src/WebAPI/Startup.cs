@@ -1,10 +1,13 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Ofx.Battleship.Application;
+using Ofx.Battleship.Application.Common.Interfaces;
 using Ofx.Battleship.Persistence;
+using Ofx.Battleship.WebAPI.Extensions;
 
 namespace Ofx.Battleship.WebAPI
 {
@@ -22,7 +25,10 @@ namespace Ofx.Battleship.WebAPI
             services.AddApplication();
             services.AddPersistence();
 
-            services.AddControllers();
+            services
+                .AddControllers()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<IBattleshipDbContext>());
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -31,7 +37,8 @@ namespace Ofx.Battleship.WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            
+            app.UseCustomExceptionHandler();
             app.UseHttpsRedirection();
 
             app.UseRouting();
