@@ -1,5 +1,5 @@
 ﻿using FluentValidation.TestHelper;
-using Ofx.Battleship.Application.Ships.Commands;
+using Ofx.Battleship.Application.Ships.Commands.CreateShip;
 using Xunit;
 
 namespace Ofx.Battleship.Application.UnitTests.Ships.Commands.CreateShip

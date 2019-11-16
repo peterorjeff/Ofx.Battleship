@@ -9,7 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Ofx.Battleship.Application.Ships.Commands
+namespace Ofx.Battleship.Application.Ships.Commands.CreateShip
 {
     public class CreateShipCommandHandler : IRequestHandler<CreateShipCommand, ShipViewModel>
     {

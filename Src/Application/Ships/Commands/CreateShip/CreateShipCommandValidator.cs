@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Ofx.Battleship.Application.Ships.Commands
+namespace Ofx.Battleship.Application.Ships.Commands.CreateShip
 {
     public class CreateShipCommandValidator : AbstractValidator<CreateShipCommand>
     {

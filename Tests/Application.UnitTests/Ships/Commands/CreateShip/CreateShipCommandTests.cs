@@ -1,15 +1,14 @@
 ﻿using AutoMapper;
 using FluentAssertions;
 using Ofx.Battleship.Application.Common.Exceptions;
-using Ofx.Battleship.Application.Ships.Commands;
+using Ofx.Battleship.Application.Ships.Commands.CreateShip;
 using Ofx.Battleship.Application.UnitTests.Common;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
-using static Ofx.Battleship.Application.Ships.Commands.CreateShipCommand;
+using static Ofx.Battleship.Application.Ships.Commands.CreateShip.CreateShipCommand;
 
 namespace Ofx.Battleship.Application.UnitTests.Ships.Commands.CreateShip
 {

@@ -2,7 +2,7 @@
 using Ofx.Battleship.Application.Common.Mappings;
 using Ofx.Battleship.Domain.Entities;
 
-namespace Ofx.Battleship.Application.Ships.Commands
+namespace Ofx.Battleship.Application.Ships.Commands.CreateShip
 {
     public class ShipViewModel : IMapFrom<Ship>
     {

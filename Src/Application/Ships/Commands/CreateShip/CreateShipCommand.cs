@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using System.Collections.Generic;
 
-namespace Ofx.Battleship.Application.Ships.Commands
+namespace Ofx.Battleship.Application.Ships.Commands.CreateShip
 {
     public class CreateShipCommand : IRequest<ShipViewModel>
     {
