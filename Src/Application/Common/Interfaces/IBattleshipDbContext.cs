@@ -8,6 +8,7 @@ namespace Ofx.Battleship.Application.Common.Interfaces
     public interface IBattleshipDbContext
     {
         DbSet<Game> Games { get; set; }
+        DbSet<Board> Boards { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

@@ -12,5 +12,6 @@ namespace Ofx.Battleship.Persistence
         }
 
         public DbSet<Game> Games { get; set; }
+        public DbSet<Board> Boards { get; set; }
     }
 }

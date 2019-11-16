@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Ofx.Battleship.Domain.Entities;
 using Ofx.Battleship.Persistence;
 using System;
 
@@ -15,6 +16,10 @@ namespace Ofx.Battleship.Application.UnitTests.Common
             var context = new BattleshipDbContext(options);
 
             context.Database.EnsureCreated();
+
+            context.Games.Add(new Game { GameId = 1 });
+
+            context.SaveChanges();
 
             return context;
         }
