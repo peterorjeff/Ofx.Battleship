@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Ofx.Battleship.WebAPI.Controllers
 {
-    public class GameController : BaseController
+    public class GamesController : BaseController
     {
         [HttpPost]
         public async Task<ActionResult<int>> Create()
