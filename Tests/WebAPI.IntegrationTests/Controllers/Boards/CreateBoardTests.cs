@@ -21,7 +21,10 @@ namespace Ofx.Battleship.WebAPI.IntegrationTests.Controllers.Boards
         {
             // Arrange
             var client = _factory.CreateClient();
-            var command = new CreateBoardCommand();
+            var command = new CreateBoardCommand
+            {
+                GameId = 1
+            };
             var requestContent = GetRequestContent(command);
 
             // Act

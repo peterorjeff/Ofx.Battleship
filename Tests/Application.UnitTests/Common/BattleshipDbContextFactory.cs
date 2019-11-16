@@ -17,7 +17,24 @@ namespace Ofx.Battleship.Application.UnitTests.Common
 
             context.Database.EnsureCreated();
 
-            context.Games.Add(new Game { GameId = 1 });
+            var game = new Game { GameId = 1 };
+            context.Games.Add(game);
+
+            var board = new Board { 
+                Game = game,
+                DimensionX = 10,
+                DimensionY = 10
+            };
+            context.Boards.Add(board);
+
+            var ship = new Ship { Board = board };
+            context.Ships.Add(ship);
+
+            context.ShipParts.AddRange(new[]
+            {
+                new ShipPart { Ship = ship, X = 1, Y = 1 },
+                new ShipPart { Ship = ship, X = 1, Y = 2 }
+            });
 
             context.SaveChanges();
 
