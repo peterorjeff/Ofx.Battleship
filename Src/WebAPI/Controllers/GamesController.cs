@@ -7,11 +7,11 @@ namespace Ofx.Battleship.WebAPI.Controllers
     public class GamesController : BaseController
     {
         [HttpPost]
-        public async Task<ActionResult<int>> Create()
+        public async Task<ActionResult<GameViewModel>> Create()
         {
-            var gameId = await Mediator.Send(new CreateGameCommand());
+            var game = await Mediator.Send(new CreateGameCommand());
 
-            return Ok(gameId);
+            return Ok(game);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Ofx.Battleship.Application.Games.Commands.CreateGame;
 using Ofx.Battleship.WebAPI.IntegrationTests.Common;
 using System.Threading.Tasks;
 using Xunit;
@@ -26,10 +27,10 @@ namespace Ofx.Battleship.WebAPI.IntegrationTests.Controllers.Games
             
             response.EnsureSuccessStatusCode();
 
-            var gameId = await GetResponseContent<int>(response);
+            var content = await GetResponseContent<GameViewModel>(response);
 
             // Assert
-            gameId.Should().BePositive();
+            content.GameId.Should().BePositive();
         }
     }
 }

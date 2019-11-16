@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Ofx.Battleship.Application.Common.Interfaces;
 using Ofx.Battleship.Domain.Entities;
 using System.Threading;
@@ -6,16 +7,18 @@ using System.Threading.Tasks;
 
 namespace Ofx.Battleship.Application.Games.Commands.CreateGame
 {
-    public class CreateGameCommandHandler : IRequestHandler<CreateGameCommand, int>
+    public class CreateGameCommandHandler : IRequestHandler<CreateGameCommand, GameViewModel>
     {
         private readonly IBattleshipDbContext _context;
+        private readonly IMapper _mapper;
 
-        public CreateGameCommandHandler(IBattleshipDbContext context)
+        public CreateGameCommandHandler(IBattleshipDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<int> Handle(CreateGameCommand request, CancellationToken cancellationToken)
+        public async Task<GameViewModel> Handle(CreateGameCommand request, CancellationToken cancellationToken)
         {
             var entity = new Game();
 
@@ -23,7 +26,9 @@ namespace Ofx.Battleship.Application.Games.Commands.CreateGame
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return entity.GameId;
+            var viewModel = _mapper.Map<GameViewModel>(entity);
+
+            return viewModel; ;
         }
     }
 }
