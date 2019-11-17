@@ -5,7 +5,7 @@
     <RootNamespace>Ofx.Battleship.WebAPI</RootNamespace>
     <AssemblyName>Ofx.Battleship.WebAPI</AssemblyName>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn>$(NoWarn);1591</NoWarn>
+    <NoWarn>$(NoWarn);1591;NU1605</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

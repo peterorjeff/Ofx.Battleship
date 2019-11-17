@@ -174,3 +174,6 @@ Nuget.exe
 tools/*
 artifacts/*
 output/*
+
+#Docker
+out/*
