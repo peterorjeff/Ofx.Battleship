@@ -5,11 +5,9 @@ using Ofx.Battleship.Application.Ships.Commands.CreateShip;
 using Ofx.Battleship.Application.UnitTests.Common;
 using Ofx.Battleship.Domain.Enums;
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
-using static Ofx.Battleship.Application.Ships.Commands.CreateShip.CreateShipCommand;
 
 namespace Ofx.Battleship.Application.UnitTests.Ships.Commands.CreateShip
 {
