@@ -2,10 +2,8 @@
 using Ofx.Battleship.Application.Ships.Commands.CreateShip;
 using Ofx.Battleship.Domain.Enums;
 using Ofx.Battleship.WebAPI.IntegrationTests.Common;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
-using static Ofx.Battleship.Application.Ships.Commands.CreateShip.CreateShipCommand;
 using static Ofx.Battleship.WebAPI.IntegrationTests.Common.Utilities;
 
 namespace Ofx.Battleship.WebAPI.IntegrationTests.Controllers.Ships
@@ -27,7 +25,7 @@ namespace Ofx.Battleship.WebAPI.IntegrationTests.Controllers.Ships
             var command = new CreateShipCommand
             {
                 BoardId = 1,
-                BowX = 1,
+                BowX = 3,
                 BowY = 1,
                 Length = 2,
                 Orientation = ShipOrientation.Horizontal

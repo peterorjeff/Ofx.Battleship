@@ -48,6 +48,15 @@ namespace Ofx.Battleship.WebAPI.IntegrationTests.Common
                     };
                     context.Boards.Add(board);
 
+                    var ship = new Ship { Board = board };
+                    context.Ships.Add(ship);
+
+                    context.ShipParts.AddRange(new[]
+                    {
+                        new ShipPart { Ship = ship, X = 1, Y = 1 },
+                        new ShipPart { Ship = ship, X = 1, Y = 2 }
+                    });
+
                     context.SaveChanges();
                 });
         }

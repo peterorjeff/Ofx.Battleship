@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Ofx.Battleship.Application.Ships.Commands.AttackShip;
 using Ofx.Battleship.Application.Ships.Commands.CreateShip;
 using System.Threading.Tasks;
 
@@ -14,5 +15,12 @@ namespace Ofx.Battleship.WebAPI.Controllers
             return Ok(ship);
         }
 
+        [HttpPut("attack")]
+        public async Task<ActionResult<AttackViewModel>> Attack([FromBody] AttackShipCommand command)
+        {
+            var attack = await Mediator.Send(command);
+
+            return Ok(attack);
+        }
     }
 }
