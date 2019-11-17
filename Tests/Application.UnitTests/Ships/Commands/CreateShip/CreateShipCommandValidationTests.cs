@@ -1,7 +1,6 @@
 ﻿using FluentValidation.TestHelper;
 using Ofx.Battleship.Application.Ships.Commands.CreateShip;
 using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 using static Ofx.Battleship.Application.Ships.Commands.CreateShip.CreateShipCommand;
 
