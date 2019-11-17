@@ -1,6 +1,9 @@
 ﻿using FluentValidation.TestHelper;
 using Ofx.Battleship.Application.Ships.Commands.CreateShip;
+using System.Collections.Generic;
+using System.Linq;
 using Xunit;
+using static Ofx.Battleship.Application.Ships.Commands.CreateShip.CreateShipCommand;
 
 namespace Ofx.Battleship.Application.UnitTests.Ships.Commands.CreateShip
 {
@@ -17,10 +20,13 @@ namespace Ofx.Battleship.Application.UnitTests.Ships.Commands.CreateShip
         public void GivenInvalidBoardId_ShouldHaveValidationError()
         {
             // Arrange
-            var boardId = -1;
+            var ship = new CreateShipCommand { BoardId = -1 };
 
-            // Act & Assert
-            _validator.ShouldHaveValidationErrorFor(x => x.BoardId, boardId);
+            // Act
+            var result = _validator.TestValidate(ship);
+
+            // Assert
+            result.ShouldHaveValidationErrorFor(x => x.BoardId);
         }
 
         [Theory]
@@ -28,9 +34,18 @@ namespace Ofx.Battleship.Application.UnitTests.Ships.Commands.CreateShip
         [InlineData(5)]
         public void GivenInvalidNumberOfShipParts_ShouldHaveValidationError(int count)
         {
-            // Arrange, Act & Assert
-            _validator.ShouldHaveValidationErrorFor(x => x.ShipParts.Count, count);
-        }
+            // Arrange
+            var ship = new CreateShipCommand { ShipParts = new List<ShipPartDto>() }; 
+            for(int i = 0; i < count; i++)
+            {
+                ship.ShipParts.Add(new ShipPartDto { X = 1, Y = i });
+            };
 
+            // Act
+            var result = _validator.TestValidate(ship);
+
+            // Assert
+            result.ShouldHaveValidationErrorFor(x => x.ShipParts);
+        }
     }
 }
