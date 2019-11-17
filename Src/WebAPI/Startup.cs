@@ -10,6 +10,9 @@ using Ofx.Battleship.Application;
 using Ofx.Battleship.Application.Common.Interfaces;
 using Ofx.Battleship.Persistence;
 using Ofx.Battleship.WebAPI.Extensions;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace Ofx.Battleship.WebAPI
 {
@@ -35,6 +38,11 @@ namespace Ofx.Battleship.WebAPI
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Battleship State Tracker API", Version = "v1" });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+                c.IncludeXmlComments(xmlPath);
             });
         }
 
