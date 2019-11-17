@@ -37,7 +37,16 @@ namespace Ofx.Battleship.WebAPI.IntegrationTests.Common
                     var context = scopedServices.GetRequiredService<BattleshipDbContext>();
                     context.Database.EnsureCreated();
 
-                    context.Games.Add(new Game());
+                    var game = new Game();
+                    context.Games.Add(game);
+
+                    var board = new Board
+                    {
+                        Game = game,
+                        DimensionX = 10,
+                        DimensionY = 10
+                    };
+                    context.Boards.Add(board);
 
                     context.SaveChanges();
                 });
