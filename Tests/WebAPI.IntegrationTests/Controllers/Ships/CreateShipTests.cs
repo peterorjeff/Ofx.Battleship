@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Ofx.Battleship.Application.Ships.Commands.CreateShip;
+using Ofx.Battleship.Domain.Enums;
 using Ofx.Battleship.WebAPI.IntegrationTests.Common;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -26,11 +27,10 @@ namespace Ofx.Battleship.WebAPI.IntegrationTests.Controllers.Ships
             var command = new CreateShipCommand
             {
                 BoardId = 1,
-                ShipParts = new List<ShipPartDto>
-                {
-                    new ShipPartDto { X = 1, Y = 1 },
-                    new ShipPartDto { X = 1, Y = 2 }
-                }
+                BowX = 1,
+                BowY = 1,
+                Length = 2,
+                Orientation = ShipOrientation.Horizontal
             };
             var requestContent = GetRequestContent(command);
 

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Converters;
 using Ofx.Battleship.Application;
 using Ofx.Battleship.Application.Common.Interfaces;
 using Ofx.Battleship.Persistence;
@@ -27,6 +28,7 @@ namespace Ofx.Battleship.WebAPI
 
             services
                 .AddControllers()
+                .AddNewtonsoftJson(options => options.SerializerSettings.Converters.Add(new StringEnumConverter()))
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<IBattleshipDbContext>());
 
         }

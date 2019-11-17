@@ -4,7 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Ofx.Battleship.Application.Common.Exceptions;
 using Ofx.Battleship.Application.Common.Interfaces;
 using Ofx.Battleship.Domain.Entities;
-using System;
+using Ofx.Battleship.Domain.Enums;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,27 +30,24 @@ namespace Ofx.Battleship.Application.Ships.Commands.CreateShip
             {
                 throw new NotFoundException(nameof(Board), request.BoardId);
             }
-            
-            // Check ship within board dimensions.
-            // Validation rule ensures X & Y are > 0, so only need to verify X & Y < board dimensions.
-            foreach(var part in request.ShipParts)
+
+            // Generate X & Y lists based on Orientation and Length
+            var xList = new List<int>();
+            var yList = new List<int>();
+            switch(request.Orientation)
             {
-                if (part.X > board.DimensionX)
-                {
-                    throw new ShipOutOfBoundsException(nameof(part.X), part.X, board.DimensionX);
-                }
-                if (part.Y > board.DimensionY)
-                {
-                    throw new ShipOutOfBoundsException(nameof(part.Y), part.Y, board.DimensionX);
-                }
+                case ShipOrientation.Horizontal:
+                    for (int i = 0; i < request.Length; i++) xList.Add(request.BowX + i);
+                    yList.Add(request.BowY);
+                    break;
+                case ShipOrientation.Vertical:
+                    for (int i = 0; i < request.Length; i++) yList.Add(request.BowY + i);
+                    xList.Add(request.BowX);
+                    break;
             }
 
-            // Check collision with existing ships.
-            // Distinct the request lists as one of them will always be entirely duplicates.
-            var xList = request.ShipParts.Select(x => x.X).Distinct();
-            var yList = request.ShipParts.Select(x => x.Y).Distinct();
-
-            // Project the X,Y and compare to xList && yList. This works as one of request X or Y is always a single integer.
+            // Collision Detection
+            // Project the X & Y and compare to xList && yList. This works as X or Y is always a single integer list.
             var collisions = _context.Ships
                 .Include(ship => ship.ShipParts)
                 .Where(ship => ship.Board == board)
@@ -66,21 +64,37 @@ namespace Ofx.Battleship.Application.Ships.Commands.CreateShip
                 throw new ShipCollisionException(collisions.Select(x => $"[{x.X},{x.Y}]").ToList());
             }
             
-            // Safe to insert the new Ship
+            // Safe to insert the new Ship.
             var ship = new Ship
             {
                 Board = board
             };
             _context.Ships.Add(ship);
 
-            _context.ShipParts.AddRange(request.ShipParts
-                .Select(parts => new ShipPart 
-                {
-                    Ship = ship,
-                    X = parts.X,
-                    Y = parts.Y
-                })
-            );
+            // Project X or Y list as ShipParts based on Orientation. 
+            switch(request.Orientation)
+            {
+                case ShipOrientation.Horizontal:
+                    _context.ShipParts.AddRange(xList
+                        .Select(x => new ShipPart
+                        {
+                            Ship = ship,
+                            X = x,
+                            Y = request.BowY
+                        })
+                    );
+                    break;
+                case ShipOrientation.Vertical:
+                    _context.ShipParts.AddRange(yList
+                        .Select(y => new ShipPart
+                        {
+                            Ship = ship,
+                            X = request.BowX,
+                            Y = y
+                        })
+                    ); 
+                    break;
+            }
 
             await _context.SaveChangesAsync(cancellationToken);
 

@@ -3,6 +3,7 @@ using FluentAssertions;
 using Ofx.Battleship.Application.Common.Exceptions;
 using Ofx.Battleship.Application.Ships.Commands.CreateShip;
 using Ofx.Battleship.Application.UnitTests.Common;
+using Ofx.Battleship.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -28,11 +29,10 @@ namespace Ofx.Battleship.Application.UnitTests.Ships.Commands.CreateShip
             var command = new CreateShipCommand
             {
                 BoardId = 100,
-                ShipParts = new List<ShipPartDto>
-                {
-                    new ShipPartDto { X = 1, Y = 1 },
-                    new ShipPartDto { X = 1, Y = 2 }
-                }
+                BowX = 1,
+                BowY = 1,
+                Length = 2,
+                Orientation = ShipOrientation.Horizontal
             };
             var handler = new CreateShipCommandHandler(_context, _mapper);
 
@@ -50,11 +50,10 @@ namespace Ofx.Battleship.Application.UnitTests.Ships.Commands.CreateShip
             var command = new CreateShipCommand
             {
                 BoardId = 1,
-                ShipParts = new List<ShipPartDto>
-                {
-                    new ShipPartDto { X = 2, Y = 1 },
-                    new ShipPartDto { X = 2, Y = 2 }
-                }
+                BowX = 2,
+                BowY = 1,
+                Length = 2,
+                Orientation = ShipOrientation.Horizontal
             };
             var handler = new CreateShipCommandHandler(_context, _mapper);
 
@@ -72,11 +71,10 @@ namespace Ofx.Battleship.Application.UnitTests.Ships.Commands.CreateShip
             var command = new CreateShipCommand
             {
                 BoardId = 1,
-                ShipParts = new List<ShipPartDto>
-                {
-                    new ShipPartDto { X = 3, Y = 1 },
-                    new ShipPartDto { X = 3, Y = 2 }
-                }
+                BowX = 3,
+                BowY = 1,
+                Length = 2,
+                Orientation = ShipOrientation.Horizontal
             };
             var handler = new CreateShipCommandHandler(_context, _mapper);
 
@@ -88,39 +86,16 @@ namespace Ofx.Battleship.Application.UnitTests.Ships.Commands.CreateShip
         }
 
         [Fact]
-        public async void Handle_GivenTooLargeDimeneion_ShouldThrowShipOutOfBoundsException()
-        {
-            // Arrange
-            var command = new CreateShipCommand
-            {
-                BoardId = 1,
-                ShipParts = new List<ShipPartDto>
-                {
-                    new ShipPartDto { X = 4, Y = 10 },
-                    new ShipPartDto { X = 4, Y = 11 }
-                }
-            };
-            var handler = new CreateShipCommandHandler(_context, _mapper);
-
-            // Act
-            Func<Task> response = async () => await handler.Handle(command, CancellationToken.None);
-
-            // Assert
-            await response.Should().ThrowAsync<ShipOutOfBoundsException>();
-        }
-
-        [Fact]
         public async void Handle_GivenCollidingShip_ShouldThrowShipCollisionException()
         {
             // Arrange
             var command = new CreateShipCommand
             {
                 BoardId = 1,
-                ShipParts = new List<ShipPartDto>
-                {
-                    new ShipPartDto { X = 1, Y = 1 },
-                    new ShipPartDto { X = 1, Y = 2 }
-                }
+                BowX = 1,
+                BowY = 1,
+                Length = 2,
+                Orientation = ShipOrientation.Horizontal
             };
             var handler = new CreateShipCommandHandler(_context, _mapper);
 
