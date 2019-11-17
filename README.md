@@ -29,9 +29,8 @@ Unit and Integration testing has been added for:
 - Controllers
 
 ## Deployment
-The application has been deployed to AWS and is available here: ...  
-Swagger / OpenAPI docs available here: ...
-
+The application has been deployed to AWS and is available here: http://battleship-alb-1867546237.ap-southeast-2.elb.amazonaws.com/api  
+Swagger / OpenAPI docs available here: http://battleship-alb-1867546237.ap-southeast-2.elb.amazonaws.com/index.html
 
 ## References
 I made use of several libraries to aid clean architecture:
