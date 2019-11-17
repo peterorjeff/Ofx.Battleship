@@ -8,9 +8,6 @@ When adding a ship, collision detection is required before placing a new ship.
 The linq expression used to determine this has a couple of steps that warrent explanation with examples.
 
 ```
-var xList = request.ShipParts.Select(x => x.X).Distinct();
-var yList = request.ShipParts.Select(x => x.Y).Distinct();
-
 var collisions = _context.Ships
     .Include(ship => ship.ShipParts)
     .Where(ship => ship.Board == board)
@@ -23,13 +20,31 @@ var collisions = _context.Ships
     .AsNoTracking();
 ```
 
-The `xList` and `yList` collections are derived from the add ship request, and we distinct them as one or the other will always contain entirely duplicate values.
+The `xList` and `yList` collections are generated based on `Orientation` and `Length` from the ship request by the following logic:
+
+```
+var xList = new List<int>();
+var yList = new List<int>();
+switch(request.Orientation)
+{
+    case ShipOrientation.Horizontal:
+        for (int i = 0; i < request.Length; i++) xList.Add(request.BowX + i);
+        yList.Add(request.BowY);
+        break;
+    case ShipOrientation.Vertical:
+        for (int i = 0; i < request.Length; i++) yList.Add(request.BowY + i);
+        xList.Add(request.BowX);
+        break;
+}
+```
+
 Example request:
 
 ```
-1,1
-1,2
-1,3
+AttackX = 1
+AttackY = 1
+Length = 3
+Orientation = Vertical
 ```
 
 Will result in the following list values:
@@ -47,7 +62,7 @@ With the following existing ships:
 3,1
 ```
 
-The collisions where cluase results in the following evaluations:
+The collisions where cluase `.Where(part => xList.Contains(part.X) && yList.Contains(part.Y))` results in the following evaluations:
 
 ```
 where xlist contains 1 && ylist contains 1 = true
