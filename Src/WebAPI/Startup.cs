@@ -67,6 +67,8 @@ namespace Ofx.Battleship.WebAPI
 
             app.UseRouting();
 
+            app.UseDeveloperCorsPolicy(env);
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
